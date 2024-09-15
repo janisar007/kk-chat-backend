@@ -51,9 +51,14 @@ export const accessChat = expressAsyncHandler(async (req, res) => {
   //here we are sending those in which current user is a part of ->
 export const fetchChats = expressAsyncHandler(async (req, res) => {
     try {
-      Chat.find({ users: { $elemMatch: { $eq: req.body.currentUserId } } })
+
+        const {currentUserId} = req.params;
+
+
+        console.log(currentUserId)
+      Chat.find({ users: { $elemMatch: { $eq: currentUserId } } })
         .populate("users")
-        .populate("groupAdmin")
+        // .populate("groupAdmin")
         .populate("latestMessage")
         .sort({ updatedAt: -1 })
         .then(async (results) => {
