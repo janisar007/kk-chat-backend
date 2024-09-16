@@ -1,10 +1,11 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
- const chatSchema = mongoose.Schema(
+const chatSchema = mongoose.Schema(
   {
     chatName: { type: String, trim: true },
     isGroupChat: { type: Boolean, default: false },
     users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    post: [{ type: mongoose.Schema.Types.ObjectId, ref: "CropPost" }],
     latestMessage: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Message",
