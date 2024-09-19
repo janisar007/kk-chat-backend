@@ -2,6 +2,7 @@ import expressAsyncHandler from "express-async-handler";
 import User from "../models/user.model.js";
 import { Message } from "../models/message.model.js";
 import { Chat } from "../models/chat.model.js";
+import CropPost from "../models/croppost.model.js";
 
 export const sendMessage = expressAsyncHandler(async (req, res) => {
     const { content, chatId, currentUserId } = req.body;
@@ -25,6 +26,10 @@ export const sendMessage = expressAsyncHandler(async (req, res) => {
       message = await User.populate(message, {
         path: "chat.users",
         select: "authUsername profileUrl email",
+      });
+      message = await CropPost.populate(message, {
+        path: "chat.post",
+        // select: "",
       });
   
       await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
