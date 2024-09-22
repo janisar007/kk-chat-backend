@@ -5,7 +5,7 @@ import CropPost from "../models/croppost.model.js";
 
 export const accessChatwithPost = expressAsyncHandler(async (req, res) => {
   const { userId, currentUserId, postId } = req.body; // userId: the user to connect with
-  console.log("postId", postId)
+  // console.log("postId", postId)
 
   if (!userId) {
     console.log("UserId param not sent with request");
@@ -75,7 +75,7 @@ export const fetchChats = expressAsyncHandler(async (req, res) => {
         const {currentUserId} = req.params;
 
 
-        console.log(currentUserId)
+        // console.log(currentUserId)
       Chat.find({ users: { $elemMatch: { $eq: currentUserId } } })
         .populate("users")
         // .populate("groupAdmin")
